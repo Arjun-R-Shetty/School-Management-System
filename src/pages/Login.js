@@ -1,25 +1,29 @@
 // src/pages/Login.js
 import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate();  // Initialize navigate
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post('/api/login', { username, password });
-      // On successful login, redirect to dashboard
+    
+    // Hardcoded credentials for testing
+    const hardcodedUsername = 'admin';
+    const hardcodedPassword = 'admin123';
+
+    // Check if the entered credentials match the hardcoded ones
+    if (username === hardcodedUsername && password === hardcodedPassword) {
+      // On successful login, navigate to the dashboard
       navigate('/dashboard');
-    } catch (error) {
+    } else {
+      // Show error message if login fails
       setErrorMessage('Invalid credentials, please try again.');
     }
   };
-
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
